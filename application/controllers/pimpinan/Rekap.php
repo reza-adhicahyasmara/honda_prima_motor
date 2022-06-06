@@ -5,34 +5,34 @@ class Rekap extends CI_Controller {
 
     function __construct(){
         parent::__construct();
-        $this->load->model('Mod_pegawai');
-        $this->load->model('Mod_profile_match');
-        $this->load->model('Mod_siswa');
+        $this->load->model('Mod_karyawan');
+        $this->load->model('Mod_promethee');
     }
 
     function index(){
-        $nip_pegawai = $this->session->userdata('ses_nip_pegawai');  
+        $nik_karyawan = $this->session->userdata('ses_nik_karyawan');  
         $hak_akses = $this->session->userdata('ses_akses');  
 
-        if($nip_pegawai != null && $hak_akses == 'Kepala Sekolah'){
-            $data['rekap'] = $this->Mod_profile_match->get_all_rekap_smt();
+        if($nik_karyawan != null && $hak_akses == 'Pimpinan'){
+            $data['rekap'] = $this->Mod_promethee->get_all_rekap();
             $data['pageTitle'] = "Rekap";
-            $this->load->view("backend/kepala_sekolah/rekap/body",$data);
+            $this->load->view("backend/pimpinan/rekap/body",$data);
         }
         else{ 
             redirect('login');
         }  
     }
 
-    function detail_rekap($kode_rekap_smt){
-        $nip_pegawai = $this->session->userdata('ses_nip_pegawai');  
+    function detail_rekap($kode_rekap){
+        $nik_karyawan = $this->session->userdata('ses_nik_karyawan');  
         $hak_akses = $this->session->userdata('ses_akses');  
 
-        if($nip_pegawai != null && $hak_akses == 'Kepala Sekolah'){
-            $data['rekap_smt'] = $this->Mod_profile_match->get_rekap_smt($kode_rekap_smt)->row_array();
-            $data['rekap'] = $this->Mod_profile_match->get_all_rank_rekap();
+        if($nik_karyawan != null && $hak_akses == 'Pimpinan'){
+            $data['rekap'] = $this->Mod_promethee->get_rekap($kode_rekap)->row_array();
+            $data['data_kriteria'] = $this->Mod_promethee->get_all_kriteria()->result_array();
+            $data['data_nilai'] = $this->Mod_promethee->get_all_penilaian_peringkat($kode_rekap)->result_array();
             $data['pageTitle'] = "Detail Rekap";
-            $this->load->view("backend/kepala_sekolah/rekap/body_detail",$data);
+            $this->load->view("backend/pimpinan/rekap/body_detail",$data);
         }
         else{ 
             redirect('login');

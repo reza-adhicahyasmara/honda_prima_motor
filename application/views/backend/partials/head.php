@@ -121,8 +121,7 @@ by projekindong
 
                         <?php }elseif($this->session->userdata('ses_akses') =='Pimpinan'){?>
                             <li class="nav-item"><a href="<?php echo base_url('pimpinan/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-grid-alt"></i><p>Dashboard</p></a></li>
-                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/siswa'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-graduation"></i><p>Siswa</p></a></li>
-                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/karyawan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-group"></i><p>Tata Usaha</p></a></li>
+                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/karyawan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-group"></i><p>Karyawan</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('pimpinan/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-line-chart"></i><p>Rekap </p></a></li>              
                         <?php } ?> 
                     </ul>
