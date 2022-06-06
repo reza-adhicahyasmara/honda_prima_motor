@@ -43,6 +43,7 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->password_karyawan;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->username_karyawan;?></td>
             <td style="text-align: center; vertical-align: middle;" >
+                <a class='btn btn-info' href="<?php echo base_url("admin/karyawan/data_penialaian_sales/").$row->nik_karyawan;?>"><span class="bx bx-fw bx-line-chart"></span></a>
                 <a class='btn btn-primary btn_edit_karyawan' nik_karyawan="<?php echo $row->nik_karyawan; ?>"><span class="bx bx-fw bxs-pencil"></span></a>
                 <a class='btn btn-danger btn_hapus_karyawan' nama_karyawan="<?php echo $row->nama_karyawan; ?>" nik_karyawan="<?php echo $row->nik_karyawan; ?>"><span class="bx bx-fw bxs-trash"></span></a>
             </td>

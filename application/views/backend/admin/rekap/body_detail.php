@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bxs-chart"></span>Data Detail Rekap</h1>
+                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bx-line-chart"></span>Data Detail Rekap</h1>
                 </div>
                 <div class="col-sm-6 float-sm-right">
                     <ol class="breadcrumb float-sm-right m-2">
@@ -43,7 +43,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-6 button-print">
+                        <div class="col-6">
                             <div class="form-group float-right">
                                 <a href="<?php echo base_url('admin/rekap/print/').$rekap['kode_rekap'];?>" target="_blank" class="btn btn-warning" id="btn_print"><span class="bx bx-fw bx-printer"></span> Print</a>
                             </div>
@@ -58,6 +58,7 @@
                                     <th colspan="4" id="" style="text-align: center; vertical-align: middle;">Data Alternatif</th>
                                     <th colspan="4" id="" style="text-align: center; vertical-align: middle;">Kriteria</th>
                                     <th colspan="3" id="" style="text-align: center; vertical-align: middle;">Promethee</th>
+                                    <th rowspan="2" id="" style="text-align: center; vertical-align: middle;">Aksi</th>
                                 </tr>
                                 <tr>
                                     <th id="" style="text-align: center; vertical-align: middle;">Foto</th>
@@ -105,6 +106,7 @@
                                         echo "<td style='text-align: center; vertical-align: middle;'>" . $data_nilai[$i]["lf_penilaian"]."</td>";
                                         echo "<td style='text-align: center; vertical-align: middle;'>" . $data_nilai[$i]["ef_penilaian"]."</td>";
                                         echo "<td style='text-align: center; vertical-align: middle;'>" . $data_nilai[$i]["nf_penilaian"]."</td>";
+                                        echo "<td style='text-align: center; vertical-align: middle;'><a class='btn btn-info' href='".base_url('admin/karyawan/data_penialaian_sales/') . $data_nilai[$i]["nik_karyawan"] . "'><span class='bx bx-fw bx-line-chart'></span></a></td>";
                                         echo "</tr>";
                                     }
                                 ?>

@@ -110,15 +110,20 @@ by projekindong
                             <li class="nav-item"><a href="<?php echo base_url('admin/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-grid-alt"></i><p>Dashboard</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('admin/karyawan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-group"></i><p>Karyawan </p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('admin/penilaian'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-calendar-edit"></i><p>Penilaian </p></a></li>
-                            <li class="nav-item"><a href="<?php echo base_url('admin/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-chart"></i><p>Rekap </p></a></li>
+                            <li class="nav-item"><a href="<?php echo base_url('admin/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-line-chart"></i><p>Rekap </p></a></li>
+
+
+
+                        <?php }elseif($this->session->userdata('ses_akses') =='Sales'){?>
+                            <li class="nav-item"><a href="<?php echo base_url('sales/data_penilaian_sales'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-line-chart"></i><p>Data Penilaian</p></a></li>      
 
 
 
                         <?php }elseif($this->session->userdata('ses_akses') =='Pimpinan'){?>
-                            <li class="nav-item"><a href="<?php echo base_url('sales/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-grid-alt"></i><p>Dashboard</p></a></li>
-                            <li class="nav-item"><a href="<?php echo base_url('sales/siswa'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-graduation"></i><p>Siswa</p></a></li>
-                            <li class="nav-item"><a href="<?php echo base_url('sales/karyawan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-group"></i><p>Tata Usaha</p></a></li>
-                            <li class="nav-item"><a href="<?php echo base_url('sales/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-chart"></i><p>Rekap </p></a></li>              
+                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-grid-alt"></i><p>Dashboard</p></a></li>
+                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/siswa'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-graduation"></i><p>Siswa</p></a></li>
+                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/karyawan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-group"></i><p>Tata Usaha</p></a></li>
+                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-line-chart"></i><p>Rekap </p></a></li>              
                         <?php } ?> 
                     </ul>
                     <ul class="nav nav-pills nav-sidebar nav-compact flex-column nav-child-indent" style="position: absolute; bottom: 10px;">

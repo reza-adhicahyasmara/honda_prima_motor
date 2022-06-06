@@ -62,7 +62,7 @@ class Dashboard extends CI_Controller {
             $data['bobot'] = $this->Mod_profile_match->get_all_bobot();
 
             $data['pageTitle'] = "Dashboard";
-            $this->load->view("backend/tata_usaha/dashboard/body",$data);
+            $this->load->view("backend/admin/dashboard/body",$data);
         }
         else{ 
             redirect('login');
