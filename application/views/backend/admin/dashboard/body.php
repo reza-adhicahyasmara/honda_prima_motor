@@ -18,57 +18,11 @@
     
     <section class="content">
         <div class="container-fluid">
-            <div class="row">       
-                <div class="col-md-3 col-12">
-                    <div class="small-box" style="border: 2px solid #17a2b8; border-radius: 10px">
-                        <div class="inner">
-                            <h3><?php echo number_format($jumlah_siswa, 0, ".", "."); ?></h3>
-                            <p>Siswa</p>
-                        </div>
-                        <div class="icon">
-                            <i class="bx bxs-graduation"></i>
-                        </div>
-                    </div>
-                </div>  
-                <div class="col-md-3 col-12">
-                    <div class="small-box" style="border: 2px solid #17a2b8; border-radius: 10px">
-                        <div class="inner">
-                            <h3><?php echo number_format($kelayakan_rekap, 0, ".", "."); ?></h3>
-                            <p>Penerimaan Bantuan</p>
-                        </div>
-                        <div class="icon">
-                            <i class="bx bxs-donate-heart"></i>
-                        </div>
-                    </div>
-                </div>  
-                <div class="col-md-3 col-12">
-                    <div class="small-box" style="border: 2px solid #17a2b8; border-radius: 10px">
-                        <div class="inner">
-                            <h3>Rp. <?php echo number_format($dana_rekap, 0, ".", "."); ?></h3>
-                            <p>Total Dana Bantuan</p>
-                        </div>
-                        <div class="icon">
-                            <i class="bx bxs-wallet"></i>
-                        </div>
-                    </div>
-                </div>     
-                <div class="col-md-3 col-12">
-                    <div class="small-box" style="border: 2px solid #17a2b8; border-radius: 10px">
-                        <div class="inner">
-                            <h3><?php echo number_format($rekap_smt, 0, ".", "."); ?></h3>
-                            <p>Rekap Data</p>
-                        </div>
-                        <div class="icon">
-                            <i class="bx bxs-chart"></i>
-                        </div>
-                    </div>
-                </div>                              
-            </div> 
-            <div class="row">     
-                <div class="col-lg-6 col-12">
-                    <div class="card" style="border: 2px solid #17a2b8; border-radius: 10px">
+            <div class="row">   
+                <div class="col-lg-12 col-12">
+                    <div class="card">
                         <div class="card-body">
-                            <h4>Penerima Bantuan</h4>
+                            <h4>Sales Promethee Global</h4>
                             <br>
                             <div class="chart" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;">
                                 <canvas id="chart_penerima"></canvas>       
@@ -76,190 +30,165 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-12">
-                    <div class="card" style="border: 2px solid #17a2b8; border-radius: 10px">
+                <div class="col-lg-12 col-12">
+                    <div class="card">
                         <div class="card-body">
-                            <h4>Dana Bantuan</h4>
+                            <h4>Sales Terbaik</h4>
                             <br>
-                            <div class="chart" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;">
-                                <canvas id="chart_dana"></canvas>       
-                            </div>                      
+                            <table style="width:100%" id="datatable_sales" class="table table-bordered table-striped">
+                            <caption></caption>
+                            <thead>
+                                <tr>
+                                    <th id="" style="text-align: center; vertical-align: middle; width:3%">Peringkat</th>
+                                    <th id="" style="text-align: center; vertical-align: middle; ">Foto</th>
+                                    <th id="" style="text-align: center; vertical-align: middle; ">NIK</th>
+                                    <th id="" style="text-align: center; vertical-align: middle; ">Nama</th>
+                                    <th id="" style="text-align: center; vertical-align: middle; ">Alamat</th>
+                                    <th id="" style="text-align: center; vertical-align: middle; ">No. Telp / HP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    $no = 1;
+                                    foreach($sales as $row) {
+                                        if($row->level_karyawan == "Sales"){
+                                ?>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $no;?></td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <?php if($row->foto_karyawan != "") { ?>
+                                            <div class="d-flex justify-content-center">
+                                                <div class=" img-circle elevation-1" style="width: 80px; height: 80px; border:1px solid #ced4da;">
+                                                    <img src="<?php echo base_url('assets/img/karyawan/'.$row->foto_karyawan);?>" alt="Image" class="img-circle elevation-1" style="width:80px; height:80px; object-fit:cover; background:white;">
+                                                </div>
+                                            </div>
+                                        <?php }else{ ?>
+                                            <div class="d-flex justify-content-center">
+                                                <div class=" img-circle elevation-1" style="width: 80px; height: 80px; border:1px solid #ced4da;">
+                                                    <img src="<?php echo base_url('assets/img/banner/user.svg');?>" alt="Image" alt="Image" style="width:60px; height:60px; margin-top: 9px; object-fit:cover;">
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    </td>
+                                    <td style="text-align: left; vertical-align: middle;"><?php echo $row->nik_karyawan;?></td>
+                                    <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_karyawan;?></td>
+                                    <td style="text-align: left; vertical-align: middle;"><?php echo $row->alamat_karyawan;?></td>
+                                    <td style="text-align: left; vertical-align: middle;"><?php echo $row->kontak_karyawan;?></td>
+                                </tr>
+                                <?php
+                                            $no++;
+                                        }
+                                    } 
+                                ?>
+                            </tbody>
+                        </table>               
+                        </div>
+                    </div>
+                </div>  
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Promethee </h4>
+                            <br>         
+                            <p class="text-md" style="text-align: justify">
+                                Menurut Indriantoro & Utami, (2016) PROMETHEE (Preference Ranking Organization Method for Enrichment Evaluations) merupakan salah satu metode dari MCDM (Multi Criteria Decision Making) untuk penentuan urutan (prioritas) dalam analisis. Masalah pokoknya adalah kesederhanaan, kejelasan, dan kestabilan. Sangat tepat untuk digunakan karena dugaan dari dominasi kriteria yang digunakan dalam promethee adalah penggunaan nilai dalamhubungan outrangking. Sehingga diperoleh solusi atau hasil dari beberapa alternatif untuk diambil sebuah keputusan.
+                            </p>
+                            <br>         
+                            <p class="text-md" style="text-align: justify">
+                                Promethee mempunyai kemampuan untuk menangani bayak  perbandingan, pengambil keputusan hanya mendefinisikan skala ukurannya sendiri tanpa batasan, untuk mendefinisikan prioritasnya dan preferensi untuk setiap kriteria dengan memutuskan pada nilai (value), tanpa memikirkan tentang metode perhitungan.
+                            </p>
+                            <br>         
+                            <p class="text-md" style="text-align: justify">
+                                Metode promethee menggunakan kriteria dan bobot dari masing- masing kriterianya yang kemudian diolah untuk menentukan pemilihan alternatif lapangan, yang hasilnya berurutan berdasarkan prioritasnya. Penggunaan metode promethee dapat dijadikan metode untuk pengambilan keputusan di bidang pemasaran, sumber daya manusia, pemilihan lokasi, atau bidang lain yang berhubungan dengan pemilihan alternatif. Prinsip yang digunakan adalah penetapan prioritas alternatif yang telah ditetapkan berdasarkan pertimbangan (∀i | fi (.) ℜ[Real]) dengan kaidah dasar:
+                            </p>
+                            <div class="text-center">
+                                <strong class="text-lg">Max {f1(x), f2(x), f3(x)…..fk(x) | x ∈ℜ}</strong>
+                            </div>
+                            <br>         
+                            <p class="text-md" style="text-align: justify">
+                                Di mana K adalah sejumlah kumpulan alternatif, fi = (i =1,2,3,4,5,….K ) merupakan nilai/ukuran relatif kriteria untuk masing-masing alternatif. Dalam aplikasinya sejumlah kriteria telah diteteapkan unruk menjelaskan K yang merupakan penilaian dari ℜ(Real).
+                            </p>
+                            <br>         
+                            <p class="text-md" style="text-align: justify">
+                                Promethee termasuk dalam keluarga dari metode outranking yang dikembangkan oleh B.Roy, dan meliputi dua fase:
+                                <ol class="text-md">
+                                    <li>Membangun hubungan outranking dari K</li>
+                                    <li>Eksploitasi dari hubungan ini memberikan jawaban optimasi kriteria dalam paradigma permasalahan multikriteria.</li>
+                                </ol>
+                            </p>
+                            <br>         
+                            <p class="text-md" style="text-align: justify">
+                                Dalam metode Promethee terdapat 6 bentuk fungsi prefensi kriteria, dalam studi kasus ini kami menggunakan metode kriteria biasa (usuak criterion). Pada referensi ini, tidak ada beda antara a dan b jika hanya jika f(a)=f(b), apabila nilai kriteria pada masing-masing alternatif memiliki nilai berbeda, pembuat keputusan membuat preferensi mutlak untuk alternatif memiliki nilai yang lebih baik.
+                            </p>
+                            <div class="text-center">
+                                <strong class="text-lg">Dimana d = selisih nilai kriteria {d = f (a) – f (b)</strong>
+                                <br>
+                                <img src="<?php echo base_url('assets/img/banner/promethee.jpg');?>" alt="Image" alt="Image" style="width:200px; margin-top: 9px;">
+                            </div>
+                            <br>    
+                            <p class="text-md" style="text-align: justify">
+                                Keterangan:
+                                <ol class="text-md">
+                                    <li>H(d): fungsi selisih kriteria alternatif</li>
+                                    <li>d: selisih nilai kriteria {d = f(a) – f(b)}</li>
+                                </ol>
+                            </p>
                         </div>
                     </div>
                 </div>
+                
+
                 <div class="col-12">
-                    <div class="card" style="border: 2px solid #17a2b8; border-radius: 10px">
+                    <div class="card">
                         <div class="card-body">
-                            <h4>Profile Match </h4>
-                            <br>         
-                            <p class="text-md" style="text-align: justify">
-                                Profile matching secara garis besar merupakan proses membandingkan antara nilai aktual dari suatu profile yang akan dinilai dengan nilai profile yang diharapkan (E. S. Sary Fatimah, Afriyudi, 2013). Dapat diketahui perbedaan kompetensinya (disebut juga gap), semakin kecil gap yang dihasilkan maka bobot nilainya semakin besar berarti memiliki peluang besar untuk siswa mendapatkan beasiswa tersebut. Profile Matching bisa digunakan untuk menentukan dua macam beasiswa yaitu beasiswa miskin dan berprestasi (D. K. Muhammad Taufik Irawan, 2016). Metode Profile Matching tepat dipakai untuk pencarian solusi atas suatu permasalahan (M. Apriyadi and S. Hansun, 2018). Sistem dapat mempermudah pihak sekolah dalam menyeleksi siswa yang akan mendapatkan beasiswa (F. Fasya, M. Z. Arifin, Z. Muttaqin, and R. Saleh, 2018). Profile Matching memberikan kemudahan dalam memberikan efisiensi bagian kesiswaan dalam menentukan penerima beasiswa (R. Roestam, 2017). Proses penyeleksian penerima beasiswa menjadi lebih objektif (F. Fasya, M. Z. Arifin, Z. Muttaqin, and R. Saleh, 2018). Metode Profile Matching membandingkan nilai profile dari kandidat penerima beasiswa dengan nilai target yang telah ditetapkan.
-                            </p>
-
-
-                            <br>  
-                            <br>  
-                            <h4>Kriteria Profile Ideal Calon Penerima Beasiswa </h4>
+                            <h4>Penetapan Kriteria, Subkriteria, Range Nilai, dan Bobot Nilai </h4>
                             <br>   
                             <p class="text-md" style="text-align: justify">
-                                Kriteria atau ukuran standar yang menjadi dasar penilaian atau penetapan sesuatu. Kriteria yang digunakan telah ditentukan oleh pihak sekolah dapat dilihat pada data berikut.
+                                Kriteria atau ukuran standar yang menjadi dasar penilaian sales terbaik. Penetapan nilai yang digunakan adalah sebagai berikut.
                             </p>
                             <table style="width:100%" id="datatable_1" class="table table-bordered">
                                 <caption></caption>
                                 <thead>
                                     <tr>
-                                        <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
+                                        <th rowspan="2" id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
+                                        <th colspan="3" id="" style="text-align: center; vertical-align: middle; ">Kriteria</th>
+                                        <th colspan="4" id="" style="text-align: center; vertical-align: middle; ">Subkriteria</th>
+                                    </tr>
+                                    <tr>
                                         <th id="" style="text-align: center; vertical-align: middle; ">Kode</th>
                                         <th id="" style="text-align: center; vertical-align: middle; ">Nama</th>
-                                        <th id="" style="text-align: center; vertical-align: middle; ">Profil</th>
-                                        <th id="" style="text-align: center; vertical-align: middle; ">Bobot (%)</th>
-                                        <th id="" style="text-align: center; vertical-align: middle; ">Rank</th>
-                                        <th id="" style="text-align: center; vertical-align: middle; ">Nilai</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                        $no = 1;
-                                        foreach($kriteria->result() as $row1) {
-                                            if($row1->kode_kriteria == "K1"){
-                                                $row = 2;
-                                            }elseif($row1->kode_kriteria == "K2"){
-                                                $row = 6;
-                                            }elseif($row1->kode_kriteria == "K3"){
-                                                $row = 6;
-                                            }elseif($row1->kode_kriteria == "K4"){
-                                                $row = 5;
-                                            }elseif($row1->kode_kriteria == "K5"){
-                                                $row = 5;
-                                            }elseif($row1->kode_kriteria == "K6"){
-                                                $row = 4;
-                                            }
-
-                                    ?>
-                                        <td rowspan ="<?php echo $row; ?>" style="text-align: left; vertical-align: middle;"><?php echo $no;?></td>
-                                        <td rowspan ="<?php echo $row; ?>" style="text-align: left; vertical-align: middle;"><?php echo $row1->kode_kriteria;?></td>
-                                        <td rowspan ="<?php echo $row; ?>" style="text-align: left; vertical-align: middle;"><?php echo $row1->nama_kriteria;?></td>
-                                        <td rowspan ="<?php echo $row; ?>" style="text-align: center; vertical-align: middle;"><?php echo $row1->profil_kriteria;?></td>
-                                        <td rowspan ="<?php echo $row; ?>" style="text-align: center; vertical-align: middle;"><?php echo $row1->bobot_kriteria;?></td>
-                                            <?php
-                                            foreach($rank->result() as $row2) {
-                                                if($row1->kode_kriteria == $row2->kode_kriteria){
-                                                
-                                    ?>
-                                        <td style="text-align: left; vertical-align: middle;"><?php echo $row2->keterangan_rank_kriteria;?></td>
-                                        <td style="text-align: center; vertical-align: middle;"><?php echo $row2->nilai_rank_kriteria;?></td>
-                            
-                                        </tr>
-
-                                    <?php
-                                            $no++;
-                                            }
-                                        } 
-                                    } 
-                                    ?>
-                                </tbody>
-                            </table>
-
-
-                            <br>  
-                            <br>  
-                            <h4>Pemetaan Gap Profile</h4>
-                            <br>   
-                            <p class="text-md" style="text-align: justify">
-                                Gap yang dimaksud adalah perbedaan antara profile siswa dengan profile ideal yang bisa ditunjukkan pada rumus berikut:<br>
-                                <strong class="text-md">GAP = Profile Siswa − Profile Nilai</strong><br>
-                            </p>
-
-
-                            <br>  
-                            <br>  
-                            <h4>Mengelompokkan Core Factor dan Secondary Factor</h4>
-                            <br>   
-                            <p class="text-md" style="text-align: justify">
-                                Setiap kriteria dikelompokkan menjadi 2 yaitu kelompok Core Factor dan Secondary Factor. Core Factor merupakan aspek (kompetensi) yang menonjol atau paling dibutuhkan. Perhitungan Core Factor dapat menggunakan rumus di bawah ini:<br>
-                                <strong class="text-md">NCF = ∑NC/∑IC</strong><br>
-                                Keterangan:<br>
-                                NCF = nilai rata-rata core factor<br>
-                                NC = jumlah total nilai core factor<br>
-                                IC = jumlah item core factor<br><br>
-
-                                Secondary Factor merupakan item – item selain aspek yang ada pada core factor. Perhitungan Secondary Factor dapat menggunakan rumus di bawah ini:<br>
-                                <strong class="text-md">NCF = ∑NS/∑IS</strong><br>
-                                Keterangan:<br>
-                                NSF = nilai rata-rata secondary factor<br>
-                                NS = jumlah total nilai secondary factor<br>
-                                IS = jumlah item secondary factor<br><br>
-
-                                Nilai core factor dan secondary factor yang telah ditentukan oleh pihak sekolah adalah: core factor sebesar 60% dan nilai secondary factor sebesar 40% dengan pembagian seperti yang tampak pada data berrikut:
-                            </p>
-                            <table style="width:100%" id="datatable_1" class="table table-bordered">
-                                <caption></caption>
-                                <thead>
-                                    <tr>
-                                        <th id="" style="text-align: center; vertical-align: middle; ">Status Siswa</th>
-                                        <th id="" style="text-align: center; vertical-align: middle; ">Penentuan Core Factor & Secondary Factor</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="text-align: left; vertical-align: middle;">Status Anak</td>
-                                        <td style="text-align: left; vertical-align: middle;">Core Factor</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; vertical-align: middle;">Pekerjaan Ayah</td>
-                                        <td style="text-align: left; vertical-align: middle;">Secondary Factor</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; vertical-align: middle;">Pekerjaan Ibu</td>
-                                        <td style="text-align: left; vertical-align: middle;">Secondary Factor</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; vertical-align: middle;">Pengahsilan Orang Tua</td>
-                                        <td style="text-align: left; vertical-align: middle;">Core Factor</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; vertical-align: middle;">Tanggungan Orang Tua</td>
-                                        <td style="text-align: left; vertical-align: middle;">Core Factor</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left; vertical-align: middle;">Keberadaan Orang Tua</td>
-                                        <td style="text-align: left; vertical-align: middle;">Core Factor</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
-                            <br>  
-                            <br>  
-                            <h4>Menentukan Nilai Bobot</h4>
-                            <br>   
-                            <p class="text-md" style="text-align: justify">
-                                Menentukan variabel–variabel pemetaan Gap kompetensi aspek-aspek yang akan digunakan dalam memproses nilai siswa. Penentuan nilai bobot ditunjukan pada data berikut:
-                            </p>
-                            <table style="width:100%" id="datatable_1" class="table table-bordered">
-                                <caption></caption>
-                                <thead>
-                                    <tr>
-                                        <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
-                                        <th id="" style="text-align: center; vertical-align: middle; ">Selisih</th>
-                                        <th id="" style="text-align: center; vertical-align: middle; ">Bobot</th>
                                         <th id="" style="text-align: center; vertical-align: middle; ">Keterangan</th>
+                                        <th id="" style="text-align: center; vertical-align: middle; ">Kode</th>
+                                        <th id="" style="text-align: center; vertical-align: middle; ">Nama</th>
+                                        <th id="" style="text-align: center; vertical-align: middle; ">Nilai Penentapan</th>
+                                        <th id="" style="text-align: center; vertical-align: middle; ">Bobot</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
                                         $no = 1;
-                                        foreach($bobot->result() as $row) {
+                                        foreach($kriteria as $row1) {
                                     ?>
-                                        <td style="text-align: left; vertical-align: middle;"><?php echo $no;?></td>
-                                        <td style="text-align: center; vertical-align: middle;"><?php echo $row->selisih_penentuan_bobot;?></td>
-                                        <td style="text-align: center; vertical-align: middle;"><?php echo $row->bobot_penentuan_bobot;?></td>
-                                        <td style="text-align: left; vertical-align: middle;"><?php echo $row->keterangan_penentuan_bobot;?></td>
+                                    <tr>
+                                        <td rowspan="5" style="text-align: center; vertical-align: middle;"><?php echo $no;?></td>
+                                        <td rowspan="5" style="text-align: left; vertical-align: middle;"><?php echo $row1->kode_kriteria;?></td>
+                                        <td rowspan="5" style="text-align: left; vertical-align: middle;"><?php echo $row1->nama_kriteria;?></td>
+                                        <td rowspan="5" style="text-align: left; vertical-align: middle;"><?php echo $row1->keterangan_kriteria;?></td>
+                                        <?php 
+                                            foreach($subkriteria as $row2) {
+                                                if($row1->kode_kriteria == $row2->kode_kriteria){ 
+                                        ?>
+                                            <td style="text-align: left; vertical-align: middle;"><?php echo $row2->kode_subkriteria;?></td>
+                                            <td style="text-align: left; vertical-align: middle;"><?php echo $row2->nama_subkriteria;?></td>
+                                            <td style="text-align: left; vertical-align: middle;"><?php echo $row2->persentase_subkriteria;?></td>
+                                            <td style="text-align: left; vertical-align: middle;"><?php echo $row2->bobot_subkriteria;?></td>
+                                            
                                     </tr>
-
                                     <?php
-                                        $no++;
-                                    } 
+                                                } 
+                                            }
+                                            $no++;
+                                        } 
                                     ?>
                                 </tbody>
                             </table>
@@ -288,84 +217,20 @@
 <script>
     var ctx = document.getElementById("chart_penerima").getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
-            labels: <?php echo $tanggal_rekap_smt; ?>, 
+            labels: <?php echo $nama_karyawan; ?>, 
             datasets: [
                 {
-                    label               : 'Kelas 7',
-                    backgroundColor     : 'rgba(23, 162, 184, 0.8)',
-                    borderColor         : 'rgba(23, 162, 184, 0.8)',
+                    label               : 'Total Net Flow',
+                    backgroundColor     : 'rgba(220,53,69, 0.8)',
+                    borderColor         : 'rgba(220,53,69, 0.8)',
                     pointRadius         : true,
-                    pointColor          : '#17a2b8',
-                    pointStrokeColor    : 'rgba(23, 162, 184, 0.8)',
+                    pointColor          : '#dc3545',
+                    pointStrokeColor    : 'rgba(220,53,69, 0.8)',
                     pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(23, 162, 184,1)',
-                    data                : <?php echo $siswa_kls7_rekap_smt; ?>
-                },
-                {
-                    label               : 'Kelas 8',
-                    backgroundColor     : 'rgba(0, 123, 255, 0.8)',
-                    borderColor         : 'rgba(0, 123, 255, 0.8)',
-                    pointRadius         : true,
-                    pointColor          : '#007bff',
-                    pointStrokeColor    : 'rgba(0, 123, 255, 0.8)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0, 123, 255,1)',
-                    data                : <?php echo $siswa_kls8_rekap_smt; ?>
-                },
-                {
-                    label               : 'Kelas 9',
-                    backgroundColor     : 'rgba(127, 17,244, 0.8)',
-                    borderColor         : 'rgba(127, 17,244, 0.8)',
-                    pointRadius         : true,
-                    pointColor          : '#6f42c1',
-                    pointStrokeColor    : 'rgba(127, 17,244, 0.8)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(127, 17,244,1)',
-                    data                : <?php echo $siswa_kls9_rekap_smt; ?>
-                },
-            ],
-        },
-        options: {
-            maintainAspectRatio : false,
-            responsive : true,
-            legend: {
-                position: "bottom"
-            },
-            scales: {
-                xAxes: [{
-                    gridLines : {
-                        display : false,
-                    }
-                }],
-                yAxes: [{
-                    gridLines : {
-                        display : false,
-                    }
-                }]
-            }                                    
-        }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById("chart_dana").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: <?php echo $tanggal_rekap_smt; ?>, 
-            datasets: [
-                {
-                    label               : 'Dana Bantuan (Rp.)',
-                    backgroundColor     : 'rgba(40, 167, 69, 0.8)',
-                    borderColor         : 'rgba(40, 167, 69, 0.8)',
-                    pointRadius         : true,
-                    pointColor          : '#28a745',
-                    pointStrokeColor    : 'rgba(40, 167, 69, 0.8)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(40, 167, 69, 1)',
-                    data                : <?php echo $dana_bantuan_rekap_smt; ?>
+                    pointHighlightStroke: 'rgba(220,53,69,1)',
+                    data                : <?php echo $netflow; ?>
                 },
             ],
         },

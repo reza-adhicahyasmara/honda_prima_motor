@@ -14,52 +14,20 @@ class Dashboard extends CI_Controller {
         $hak_akses = $this->session->userdata('ses_akses');  
 
         if($nik_karyawan != null && $hak_akses == 'Admin'){
-            //LOAD 1
-            $jumlah_siswa = 0;
-            foreach($this->Mod_siswa->get_all_siswa()->result() as $row) {
-                $jumlah_siswa += 1;
-            }
-            $data ['jumlah_siswa'] = $jumlah_siswa; 
-
-            //LOAD 2
-            $kelayakan_rekap = 0;
-            $dana_rekap = 0;
-            foreach($this->Mod_profile_match->get_all_rekap()->result() as $row) {
-                if($row->kelayakan_rekap == "Diterima"){
-                    $kelayakan_rekap += 1;
-                    $dana_rekap += $row->dana_rekap;
-                }
-            }
-            $data ['kelayakan_rekap'] = $kelayakan_rekap; 
-            $data ['dana_rekap'] = $dana_rekap; 
-
-            //LOAD 3
-            $rekap_smt = 0;
-            foreach($this->Mod_profile_match->get_all_rekap_smt()->result() as $row) {
-                $rekap_smt += 1;
-                $siswa_kls7_rekap_smt[] = $row->siswa_kls7_rekap_smt;
-                $siswa_kls8_rekap_smt[] = $row->siswa_kls8_rekap_smt;
-                $siswa_kls9_rekap_smt[] = $row->siswa_kls9_rekap_smt;
-                $dana_bantuan_rekap_smt[] = $row->dana_bantuan_rekap_smt;
-                $tanggal_rekap_smt[] = $row->tanggal_rekap_smt;
+            $data['sales'] = $this->Mod_promethee->get_all_penilaian_sales()->result();
+            foreach($this->Mod_promethee->get_all_penilaian_sales()->result() as $row) {
+                $netflow[] = $row->netflow;
+                $nama_karyawan[] = $row->nama_karyawan;
             }
 
-            if (!isset($siswa_kls7_rekap_smt)){$siswa_kls7_rekap_smt = NULL;}
-            if (!isset($siswa_kls8_rekap_smt)){$siswa_kls8_rekap_smt = NULL;}
-            if (!isset($siswa_kls9_rekap_smt)){$siswa_kls9_rekap_smt = NULL;}
-            if (!isset($dana_bantuan_rekap_smt)){$dana_bantuan_rekap_smt = NULL;}
-            if (!isset($tanggal_rekap_smt)){$tanggal_rekap_smt = NULL;}
+            if (!isset($netflow)){$netflow = NULL;}
+            if (!isset($nama_karyawan)){$nama_karyawan = NULL;}
 
-            $data['siswa_kls7_rekap_smt'] = json_encode($siswa_kls7_rekap_smt);
-            $data['siswa_kls8_rekap_smt'] = json_encode($siswa_kls8_rekap_smt);
-            $data['siswa_kls9_rekap_smt'] = json_encode($siswa_kls9_rekap_smt);
-            $data['dana_bantuan_rekap_smt'] = json_encode($dana_bantuan_rekap_smt);
-            $data['tanggal_rekap_smt'] = json_encode($tanggal_rekap_smt);
-            $data ['rekap_smt'] = $rekap_smt; 
+            $data['netflow'] = json_encode($netflow);
+            $data['nama_karyawan'] = json_encode($nama_karyawan);
 
-            $data['kriteria'] = $this->Mod_profile_match->get_kriteria();
-            $data['rank'] = $this->Mod_profile_match->get_all_kriteria();
-            $data['bobot'] = $this->Mod_profile_match->get_all_bobot();
+            $data['kriteria'] = $this->Mod_promethee->get_all_kriteria()->result();
+            $data['subkriteria'] = $this->Mod_promethee->get_all_subkriteria()->result();
 
             $data['pageTitle'] = "Dashboard";
             $this->load->view("backend/admin/dashboard/body",$data);

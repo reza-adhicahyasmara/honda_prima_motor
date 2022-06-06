@@ -36,6 +36,15 @@ class Mod_promethee extends CI_Model {
         $this->db->order_by('penilaian.ranking_penilaian ASC');
         return $this->db->get(); 
     }
+    
+    function get_all_penilaian_sales(){ 
+        $this->db->select('karyawan.*, SUM(penilaian.nf_penilaian) AS netflow');
+        $this->db->join('karyawan', 'karyawan.nik_karyawan = penilaian.nik_karyawan', 'left');
+        $this->db->where('karyawan.level_karyawan', 'Sales');
+        $this->db->group_by('penilaian.nik_karyawan');
+        $this->db->order_by('netflow DESC');
+        return $this->db->get('penilaian'); 
+    }
 
     function get_all_penilaian_bulan_ini(){ 
         $this->db->select('penilaian.*, karyawan.*');
