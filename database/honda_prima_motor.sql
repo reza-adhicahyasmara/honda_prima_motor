@@ -72,7 +72,7 @@ CREATE TABLE `penilaian` (
   `kode_penilaian` int(10) NOT NULL AUTO_INCREMENT,
   `kode_rekap` varchar(50) DEFAULT NULL,
   `nik_karyawan` varchar(10) DEFAULT NULL,
-  `tanggal_penilaian` date DEFAULT NULL,
+  `tanggal_penilaian` datetime DEFAULT NULL,
   `k1_penilaian` float DEFAULT NULL,
   `k2_penilaian` float DEFAULT NULL,
   `k3_penilaian` float DEFAULT NULL,
@@ -83,17 +83,22 @@ CREATE TABLE `penilaian` (
   `ranking_penilaian` int(10) DEFAULT NULL,
   `kelayakan_penilaian` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`kode_penilaian`)
-) ENGINE=InnoDB AUTO_INCREMENT=44460 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=44465 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `penilaian` */
 
 insert  into `penilaian`(`kode_penilaian`,`kode_rekap`,`nik_karyawan`,`tanggal_penilaian`,`k1_penilaian`,`k2_penilaian`,`k3_penilaian`,`k4_penilaian`,`lf_penilaian`,`ef_penilaian`,`nf_penilaian`,`ranking_penilaian`,`kelayakan_penilaian`) values 
-(0,NULL,'33333','2022-04-22',1,1,1,1,NULL,NULL,NULL,NULL,NULL),
-(2,'RKP-20220606080649','44444','2022-06-24',3,4,5,3,0.7425,0.495,0.2475,2,NULL),
-(3,'RKP-20220606080649','55555','2022-06-24',4,3,4,2,0.495,0.66,-0.165,4,NULL),
-(4,'RKP-20220606080649','66666','2022-06-01',4,5,3,1,0.5775,0.66,-0.0825,3,NULL),
-(5,'RKP-20220606080649','77777','2022-06-24',2,1,2,4,0.2475,1.0725,-0.825,5,NULL),
-(44454,'RKP-20220606080649','33333','2022-06-27',5,4,4,5,0.99,0.165,0.825,1,NULL);
+(0,NULL,'33333','2022-04-22 14:14:00',2,2,2,4,0.2475,1.0725,-0.0825,5,NULL),
+(2,'RKP-20220506080649','44444','2022-05-24 18:04:43',3,4,5,3,0.7425,0.495,0.2475,2,NULL),
+(3,'RKP-20220506080649','55555','2022-05-05 17:54:34',4,3,4,2,0.495,0.66,-0.165,4,NULL),
+(4,'RKP-20220506080649','66666','2022-05-05 14:57:54',4,5,3,1,0.5775,0.66,-0.0825,3,NULL),
+(5,'RKP-20220606080649','77777','2022-05-24 15:43:45',2,1,2,4,0.2475,1.0725,-0.825,5,NULL),
+(44454,'RKP-20220506080649','33333','2022-05-27 15:34:54',5,4,4,5,0.99,0.165,0.825,1,NULL),
+(44460,'RKP-20220607090656','33333','2022-06-07 09:06:02',4,5,4,3,0.5775,0.5775,0,3,NULL),
+(44461,'RKP-20220607090656','44444','2022-06-07 09:06:08',5,3,5,5,0.7425,0.165,0.5775,1,NULL),
+(44462,'RKP-20220607090656','55555','2022-06-07 09:06:10',5,3,3,4,0.4125,0.5775,-0.165,4,NULL),
+(44463,'RKP-20220607090656','77777','2022-06-07 09:06:13',3,5,5,5,0.7425,0.2475,0.495,2,NULL),
+(44464,'RKP-20220607090656','66666','2022-06-07 09:06:16',3,3,3,3,0,0.9075,-0.9075,5,NULL);
 
 /*Table structure for table `rekap` */
 
@@ -109,7 +114,8 @@ CREATE TABLE `rekap` (
 /*Data for the table `rekap` */
 
 insert  into `rekap`(`kode_rekap`,`tanggal_rekap`,`keterangan_rekap`) values 
-('RKP-20220606080649','2022-06-06 08:06:49','Mantap');
+('RKP-20220506080649','2022-05-05 08:06:49','Untuk bonus tengah tahun'),
+('RKP-20220607090656','2022-06-07 09:06:56','Bonus ulang tahun honda');
 
 /*Table structure for table `subkriteria` */
 

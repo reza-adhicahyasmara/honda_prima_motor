@@ -39,7 +39,7 @@ class Penilaian extends CI_Controller {
 
     function simpan_penilaian(){ 
         $nik_karyawan = $this->input->post('nik_karyawan');
-        $tanggal_penilaian = date("Y-m-d");
+        $tanggal_penilaian = date("Y-m-d H:m:s");
         
         $cek_penilaian = $this->Mod_promethee->cek_tanggal_penilaian($nik_karyawan);
         if($cek_penilaian->num_rows() > 0){
