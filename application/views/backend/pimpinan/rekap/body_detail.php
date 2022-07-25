@@ -41,6 +41,19 @@
                                     <td class="p-1">:</td>
                                     <td class="p-1"><?php echo $rekap['keterangan_rekap']; ?></td>
                                 </tr>
+                                <tr>
+                                    <th class="p-1">Status</th>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">
+                                        <?php 
+                                            if($rekap['verifikasi_rekap'] == "Belum Diverifikasi"){
+                                                echo "<span class='badge rounded-pill bg-warning text-sm'>".$rekap['verifikasi_rekap']."</span>";
+                                            } elseif($rekap['verifikasi_rekap'] == "Sudah Diverifikasi"){
+                                                echo "<span class='badge rounded-pill bg-success text-sm'>".$rekap['verifikasi_rekap']."</span>";
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -305,6 +318,17 @@
                             </tbody>
                         </table>
                     </div>
+                    
+                    <?php if($rekap['verifikasi_rekap'] == "Belum Diverifikasi"){ ?>
+                        <div class="row">
+                            <div class="col-6">
+                                
+                            </div>
+                            <div class="col-6">
+                                <a type="button" class="btn bg-success float-right" id="btn_verifikasi" kode_rekap=<?php echo $rekap['kode_rekap']; ?>  tanggal_rekap=<?php echo $rekap['tanggal_rekap']; ?> ><span class="bx bx-fw bx-check"></span> Verifikasi Rekap</a>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -325,6 +349,56 @@ $('ul.nav-treeview a').filter(function() {
     return this.href == url;
 }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
 
+</script>
+
+<script>
+    $(document).on('click', '#btn_verifikasi', function() {
+        var kode_rekap=$(this).attr("kode_rekap");
+        var tanggal_rekap=$(this).attr("tanggal_rekap");
+        Swal.fire({
+            title: 'Verifikasi Penilaian',
+            text: 'Tanggal "' + tanggal_rekap + '"!',
+            type: 'warning',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#007bff',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Verifkasi',
+            cancelButtonText: "Tidak, batalkan",
+            showLoaderOnConfirm: true,
+            customClass: 'animated tada',
+            preConfirm: function() {
+                return new Promise(function(resolve) {
+                    $.ajax({
+                        url: "<?php echo base_url('pimpinan/rekap/verifikasi');?>",
+                        method: 'POST',
+                        data: {
+                            kode_rekap:kode_rekap
+                        },                
+                    })
+                    .done(function(response) {
+                        Swal.fire({
+                            title: 'Data Berhasil Diupadate',
+                            icon: 'success',
+                            showConfirmButton: true,
+                            confirmButtonColor: '#007bff',
+                        })
+                        .then(function(){
+                            window.location.reload();
+                        });
+                    })
+                    .fail(function() {
+                        Swal.fire({
+                            title: 'Terjadi Kesalahan',
+                            icon: 'error',
+                            showConfirmButton: true,
+                            confirmButtonColor: '#007bff',
+                        })
+                    });
+                });
+            },
+        });
+    });  
 </script>
 
 </body>

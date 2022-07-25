@@ -41,12 +41,27 @@
                                     <td class="p-1">:</td>
                                     <td class="p-1"><?php echo $rekap['keterangan_rekap']; ?></td>
                                 </tr>
+                                <tr>
+                                    <th class="p-1">Status</th>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">
+                                        <?php 
+                                            if($rekap['verifikasi_rekap'] == "Belum Diverifikasi"){
+                                                echo "<span class='badge rounded-pill bg-warning text-sm'>".$rekap['verifikasi_rekap']."</span>";
+                                            } elseif($rekap['verifikasi_rekap'] == "Sudah Diverifikasi"){
+                                                echo "<span class='badge rounded-pill bg-success text-sm'>".$rekap['verifikasi_rekap']."</span>";
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                         <div class="col-6">
-                            <div class="form-group float-right">
-                                <a href="<?php echo base_url('admin/rekap/print/').$rekap['kode_rekap'];?>" target="_blank" class="btn btn-warning" id="btn_print"><span class="bx bx-fw bx-printer"></span> Print</a>
-                            </div>
+                            <?php if($rekap['verifikasi_rekap'] == "Sudah Diverifikasi"){ ?>
+                                <div class="form-group float-right">
+                                    <a href="<?php echo base_url('admin/rekap/print/').$rekap['kode_rekap'];?>" target="_blank" class="btn btn-warning" id="btn_print"><span class="bx bx-fw bx-printer"></span> Print</a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="table-responsive">

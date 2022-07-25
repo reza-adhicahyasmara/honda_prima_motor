@@ -118,5 +118,10 @@ class Mod_promethee extends CI_Model {
         $this->db->insert('rekap', $data);
     }
 
+    function update_rekap($kode_rekap, $data){
+        $this->db->where('kode_rekap', $kode_rekap);
+		$this->db->update('rekap', $data);
+    }
+
 
 }

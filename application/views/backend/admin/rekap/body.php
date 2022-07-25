@@ -26,6 +26,7 @@
                         <thead>
                             <tr>
                                 <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
+                                <th id="" style="text-align: center; vertical-align: middle; ">Status</th>
                                 <th id="" style="text-align: center; vertical-align: middle; ">Tanggal Rekap</th>
                                 <th id="" style="text-align: center; vertical-align: middle; ">Keterangan</th>
                                 <th id="" style="text-align: center; vertical-align: middle; ">Aksi</th>
@@ -38,6 +39,15 @@
                             ?>
                             <tr>
                                 <td style="text-align: center; vertical-align: middle;"><?php echo $no;?></td>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <?php 
+                                        if($row->verifikasi_rekap == "Belum Diverifikasi"){
+                                            echo "<span class='badge rounded-pill bg-warning text-sm'>".$row->verifikasi_rekap."</span>";
+                                        } elseif($row->verifikasi_rekap == "Sudah Diverifikasi"){
+                                            echo "<span class='badge rounded-pill bg-success text-sm'>".$row->verifikasi_rekap."</span>";
+                                        }
+                                    ?>
+                                </td>
                                 <td style="text-align: left; vertical-align: middle;"><?php echo $row->tanggal_rekap;?></td>
                                 <td style="text-align: left; vertical-align: middle;"><?php echo $row->keterangan_rekap;?></td>
                                 <td style="text-align: center; vertical-align: middle;" >

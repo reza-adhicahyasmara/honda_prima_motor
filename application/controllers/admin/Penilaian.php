@@ -68,6 +68,7 @@ class Penilaian extends CI_Controller {
             'kode_rekap'            => $kode_rekap,    
             'tanggal_rekap'         => date("Y-m-d H:m:s"),   
             'keterangan_rekap'      => $this->input->post('keterangan_rekap'),   
+            'verifikasi_rekap'      => "Belum Diverifikasi",
         );
         $this->Mod_promethee->insert_rekap($data);  
 

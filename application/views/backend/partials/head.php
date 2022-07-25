@@ -1,6 +1,14 @@
 <?php 
     $url_foto_karyawan = base_url('assets/img/karyawan/'.$this->session->userdata('ses_foto_karyawan'));
     $url_gambar_profil = base_url('assets/img/banner/user.svg');
+
+
+    $verifikasi = 0;
+    foreach($this->Mod_promethee->get_all_rekap()->result() as $row) {
+        if($row->verifikasi_rekap == "Belum Diverifikasi"){
+            $verifikasi += 1;
+        }
+    }
 ?>  
 
 
@@ -27,7 +35,7 @@ by projekindong
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/banner/logo.png'); ?>" color="#000000"></link>
-    <title><?php echo $pageTitle; ?></title>
+    <title><?php if($verifikasi != 0){echo "(".$verifikasi.") ";} echo $pageTitle; ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
@@ -110,7 +118,7 @@ by projekindong
                             <li class="nav-item"><a href="<?php echo base_url('admin/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-grid-alt"></i><p>Dashboard</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('admin/karyawan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-group"></i><p>Karyawan </p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('admin/penilaian'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-calendar-edit"></i><p>Penilaian </p></a></li>
-                            <li class="nav-item"><a href="<?php echo base_url('admin/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-line-chart"></i><p>Rekap </p></a></li>
+                            <li class="nav-item"><a href="<?php echo base_url('admin/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-line-chart"></i><p>Rekap  <?php if($verifikasi != 0){ ?><span class="badge badge-warning right"> <?php echo $verifikasi; ?></span><?php } ?> </p></a></li>
 
 
 
@@ -122,7 +130,7 @@ by projekindong
                         <?php }elseif($this->session->userdata('ses_akses') =='Pimpinan'){?>
                             <li class="nav-item"><a href="<?php echo base_url('pimpinan/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-grid-alt"></i><p>Dashboard</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('pimpinan/karyawan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-group"></i><p>Karyawan</p></a></li>
-                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-line-chart"></i><p>Rekap </p></a></li>              
+                            <li class="nav-item"><a href="<?php echo base_url('pimpinan/rekap'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-line-chart"></i><p>Rekap  <?php if($verifikasi != 0){ ?><span class="badge badge-warning right"> <?php echo $verifikasi; ?></span><?php } ?> </p></a></li>              
                         <?php } ?> 
                     </ul>
                     <ul class="nav nav-pills nav-sidebar nav-compact flex-column nav-child-indent" style="position: absolute; bottom: 10px;">

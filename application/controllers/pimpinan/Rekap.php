@@ -39,5 +39,15 @@ class Rekap extends CI_Controller {
         }  
     }
 
+    function verifikasi(){
+        $kode_rekap = $this->input->post('kode_rekap');
+        $data  = array(
+            'kode_rekap'        => $kode_rekap,
+            'verifikasi_rekap'  => "Sudah Diverifikasi"           
+        );
+        
+        $this->Mod_promethee->update_rekap($kode_rekap, $data);   
+    }
+
 
 }
